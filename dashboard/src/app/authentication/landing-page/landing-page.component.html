@@ -1,0 +1,142 @@
+<div class="container-fluid "
+    style="background-image:url('assets/images/logo/Login-Bg_Image.png'); height: 100%;background-position: center;background-repeat: no-repeat;background-size: cover;position: relative;">
+    <div class="">
+        <div class="container-fluid">
+            <div class="row row_top">
+                <div class="col-sm-12 ">
+                    <img src="../../../assets/images/logo/logo2.png" alt=""
+                        style=" margin-bottom: 20px;margin-top: 20px; margin-left : 50px !important; width:100px !important; text-align: left !important;">
+                    <span style="font-size: 40px; margin-left: 20px;;">Post Payment Audit</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-1">
+                    <img src="../../../assets/images/logo/user_icon.png" width="53px" height="53px">
+                </div>
+                <div class="col-sm-2">
+                    <span style="font-size: 16px; color: #FF555F; float: left; text-align: left;">Welcome, <br><span
+                            style="font-size: 18px; color: #fff !important;">Cristian Castillo,</span></span><br>
+                </div>
+            </div>
+
+            <div class="row row-top">
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <nz-card nzHoverable [nzCover]="coverTemplate" (click)="selectPPA('data')"
+                            style=" opacity: 0.5 !important; color: #fff !important;"
+                            >
+                                <nz-card-meta nzTitle="Data"
+                                nzDescription="Lorem Ipsum has been the industry's">
+                            </nz-card-meta>
+                            </nz-card>
+                            <ng-template #coverTemplate>
+                            </ng-template>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <nz-card nzHoverable [nzCover]="coverTemplate"
+                            style=" opacity: 0.5 !important; color: #fff !important;" (click)="selectPPA('claim')"
+                            >
+                                <nz-card-meta nzTitle="Claim"
+                                nzDescription="Lorem Ipsum has been the industry's">
+                            </nz-card-meta>
+                            </nz-card>
+                            <ng-template #coverTemplate>
+                            </ng-template>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <nz-card nzHoverable [nzCover]="coverTemplate"
+                            style=" opacity: 0.5 !important; color: #fff !important;"
+                            >
+                                <nz-card-meta nzTitle="Reports" (click)="selectPPA('reports')"
+                                nzDescription="Lorem Ipsum has been the industry's">
+                            </nz-card-meta>
+                            </nz-card>
+                            <ng-template #coverTemplate>
+                            </ng-template>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <nz-card nzHoverable [nzCover]="coverTemplate"
+                            style=" opacity: 0.5 !important; color: #fff !important;" (click)="selectPPA('audit')"
+                            >
+                                <nz-card-meta nzTitle="Audit"
+                                    nzDescription="Lorem Ipsum has been the industry's">
+                                </nz-card-meta>
+                            </nz-card>
+                            <ng-template #coverTemplate>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="send-request">
+                    
+                          <nz-table
+                          [nzScroll]="{ y: '250px' }" 
+                            #rowSelectionTable
+                            [nzShowPagination]="false"
+                            [nzData]="listOfData"
+                          
+                          >
+                            <thead>
+                              <tr>
+                                <!-- <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th> -->
+                                <th>Select Audit Type</th>
+                              
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let data of rowSelectionTable.data">
+                                <td
+                                  [nzChecked]="setOfCheckedId.has(data.id)"
+ 
+                                  (nzCheckedChange)="onItemChecked(data.id, $event)"
+                                ></td>
+                                <td>{{ data.name }}</td>
+
+                              </tr>
+                            </tbody>
+                          </nz-table>
+                    </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                        <div class="container-fluid h-100">
+                            <div class="d-flex h-100 p-v-15 flex-column justify-content-between">
+                                <div class="d-none d-md-flex p-h-40">
+                                    <img src="assets/images/logo/logo.png" alt="">
+                                </div>
+                                <div class="container">
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                        <button nz-button
+                                            style="float: left; background-color: #FF4A55 !important; color: #fff !important;"
+                                            [disabled]="disable_next_btn" nzType="primary" (click)="sendRequest()">Next</button>
+
+
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+
+        </div>
+
+    </div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 import { LoginComponent } from './login/login.component';
 
@@ -9,6 +10,13 @@ const routes: Routes = [
         component: LoginComponent,
         data: {
             title: 'Login'
+        }
+    },
+    {
+        path: 'landing',
+        component: LandingPageComponent,
+        data: {
+            title: 'landing'
         }
     },
 ];

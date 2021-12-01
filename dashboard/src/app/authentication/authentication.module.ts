@@ -10,14 +10,17 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
-
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { LoginComponent } from './login/login.component';
 import { NzDividerModule, NzSpinModule, NzMessageServiceModule, NzIconModule, NzSelectModule, NzEmptyModule, NzTableModule, NzProgressModule, NzModalModule, NzRadioModule, NzInputNumberModule, NzPageHeaderModule, NzSwitchModule, NzPopoverModule, NzDescriptionsModule, NzBadgeModule, NzBreadCrumbModule } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
 
-;
-
-const antdModule= [
+const antdModule = [
+    NzAvatarModule,
+    NzMenuModule,
     NzDividerModule,
     NzCardModule,
     NzInputModule,
@@ -41,7 +44,8 @@ const antdModule= [
     NzDescriptionsModule,
     NzBadgeModule,
     NzSelectModule,
-  NzBreadCrumbModule
+    NzBreadCrumbModule,
+    NzCommentModule
 ]
 
 
@@ -56,12 +60,13 @@ const antdModule= [
     ],
     declarations: [
         LoginComponent,
+        LandingPageComponent,
     ],
     providers: []
 })
 
 export class AuthenticationModule {
-    constructor(public router: Router){
-        
+    constructor(public router: Router) {
+
     }
 }

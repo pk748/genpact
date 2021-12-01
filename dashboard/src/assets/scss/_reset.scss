@@ -496,14 +496,14 @@ border: 1px solid #d6e0f0 !important
 }
 
 .ant-table-fixed-header .ant-table-thead > tr > th {
-background: #0779e4 !important;
+background: #EBEBEB !important;
 color: #fff !important;
 }
 
 .ant-table thead > tr > th {
 font-weight: 500;
-background: #0779e4 !important;
-color: #fff !important;
+background: #EBEBEB !important;
+color: #000 !important;
 }
 
 .ant-btn.disabled, .ant-btn[disabled] {
@@ -600,3 +600,4 @@ box-shadow: 0 3px 6px 0 rgba(136, 135, 135, 0.2);
     color: #787d81 !important;
     font-weight: bold !important;
 }
+

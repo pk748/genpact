@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
 
-interface DataItem {
+interface ItemData {
+  id: number;
   name: string;
   age: number;
   address: string;
@@ -23,116 +24,74 @@ interface ColumnItem {
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  visible: boolean = true;
-  disable_next_btn: boolean = true
-  listOfSummaryData = [
+  listOfSelection = [
     {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
+      text: 'Select All Row',
+      onSelect: () => {
+        this.onAllChecked(true);
+      }
     },
     {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
+      text: 'Select Odd Row',
+      onSelect: () => {
+        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 !== 0));
+        this.refreshCheckedStatus();
+      }
     },
     {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
+      text: 'Select Even Row',
+      onSelect: () => {
+        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 === 0));
+        this.refreshCheckedStatus();
+      }
     }
   ];
+  checked = false;
+  indeterminate = false;
+  listOfCurrentPageData: ItemData[] = [];
+  listOfData: ItemData[] = [];
+  setOfCheckedId = new Set<number>();
 
+  constructor(){}
 
-  listOfColumns: ColumnItem[] = [
-    {
-      name: 'Name',
-      sortOrder: null,
-      sortFn: (a: DataItem, b: DataItem) => a.name.localeCompare(b.name),
-      filterMultiple: true,
-      listOfFilter: [
-        { text: 'Joe', value: 'Joe' },
-        { text: 'Jim', value: 'Jim', byDefault: true }
-      ],
-      filterFn: (list: string[], item: DataItem) => list.some(name => item.name.indexOf(name) !== -1)
-    },
-    {
-      name: 'Age',
-      sortOrder: 'descend',
-      sortFn: (a: DataItem, b: DataItem) => a.age - b.age,
-      sortDirections: ['descend', null]
-    },
-    {
-      name: 'Address',
-      sortOrder: null,
-      sortFn: (a: DataItem, b: DataItem) => a.address.length - b.address.length,
-      filterMultiple: false,
-      listOfFilter: [
-        { text: 'London', value: 'London' },
-        { text: 'Sidney', value: 'Sidney' }
-      ],
-      filterFn: (address: string, item: DataItem) => item.address.indexOf(address) !== -1
+  updateCheckedSet(id: number, checked: boolean): void {
+    if (checked) {
+      this.setOfCheckedId.add(id);
+    } else {
+      this.setOfCheckedId.delete(id);
     }
-  ];
-
-  listOfData: DataItem[] = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park'
-    }
-  ];
-
-  
-  // **************************************************************************************************************************************************
-  // ?CONSTRUCTOR START
-  // **************************************************************************************************************************************************
-  constructor(
-  ) {
-  }
-  // **************************************************************************************************************************************************
-  // ?CONSTRUCTOR END
-  // **************************************************************************************************************************************************
-
- 
-
-
-  // **************************************************************************************************************************************************
-  // ?NGONINIT END
-  // **************************************************************************************************************************************************
-  ngOnInit() {
-
-  }
-  // **************************************************************************************************************************************************
-  // ?NGONINIT END
-  // **************************************************************************************************************************************************
-
-
-
-  open(): void {
-    this.visible = true;
   }
 
-  close(): void {
-    this.visible = false;
+  onItemChecked(id: number, checked: boolean): void {
+    this.updateCheckedSet(id, checked);
+    this.refreshCheckedStatus();
   }
 
+  onAllChecked(value: boolean): void {
+    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.id, value));
+    this.refreshCheckedStatus();
+  }
+
+  onCurrentPageDataChange($event: ItemData[]): void {
+    this.listOfCurrentPageData = $event;
+    this.refreshCheckedStatus();
+  }
+
+  refreshCheckedStatus(): void {
+    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
+    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
+  }
+
+  ngOnInit(): void {
+    this.listOfData = new Array(200).fill(0).map((_, index) => {
+      return {
+        id: index,
+        name: `Edward King ${index}`,
+        age: 32,
+        address: `London, Park Lane no. ${index}`
+      };
+    });
+  }
 }
+
+

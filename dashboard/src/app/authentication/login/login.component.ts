@@ -50,10 +50,9 @@ export class LoginComponent implements OnInit {
     if(this.cuntry_name_value == null || this.cuntry_name_value == ""){
       this.country_err_text = "Please select country name"
     }else{
-      this.router.navigate(['/dashboard/home']);
+      this.router.navigate(['/authentication/landing']);
     }
 
-    // 
 
 
   }
